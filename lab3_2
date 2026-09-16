@@ -1,0 +1,50 @@
+#include <cmath>
+#include <stdio.h>
+#include <stdio.h>
+#include <locale.h>
+
+using namespace std;
+
+int main()
+{
+    setlocale(LC_ALL, "Russian");
+
+    int n;
+    printf("Введите количество треугольников: ");
+    scanf("%d", &n);
+    while (n<=0) {
+        printf("Введите положительное число: ");
+        scanf("%d", &n);
+    }
+
+    double p1, p2;
+    printf("Введите P1 и P2: ");
+    scanf("%lf %lf", &p1, &p2);
+    while (p1<= 0 || p2<= 0) {
+        printf("Введи положительное число: ");
+    }
+    int k = 0;
+
+    for (int i = 0; i < n; i++) {
+        double ax, ay;
+        printf("Введите координаты точки А: ");
+        scanf("%lf %lf", &ax, &ay);
+
+        double bx, by;
+        printf("Введите координаты точки B: ");
+        scanf("%lf %lf", &bx, &by);
+
+        double cx, cy;
+        printf("Введите координаты точки C: ");
+        scanf("%lf %lf", &cx, &cy);
+
+        double ab = pow((pow(abs(ax - bx), 2) + pow(abs(ay - by), 2)), 0.5);
+        double ac = pow((pow(abs(ax - cx), 2) + pow(abs(ay - cy), 2)), 0.5);
+        double bc = pow((pow(abs(bx - cx), 2) + pow(abs(by - cy), 2)), 0.5);
+        double p = ab + ac + bc;
+        if (p1 < p && p2 > p) {
+            k++;
+        }
+    }
+    printf("Количество треугольников: %d", k);
+}
