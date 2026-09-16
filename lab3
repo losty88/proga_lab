@@ -1,5 +1,5 @@
 #include <stdio.h>
-#include <iostream>
+#include <stdio.h>
 #include <locale.h>
 
 using namespace std;
@@ -9,28 +9,28 @@ int main()
     setlocale(LC_ALL, "Russian");
 
     int n;
-    cout << "Введите количество троек";
-    cin >> n;
-    if (n < 0){
-        cout << "Дебил, введи положтительное число))";
-        cin >> n;
+    printf("Введите количество троек");
+    scanf("%d", &n);
+    while (n <= 0){
+        printf("Дебил, введи положтительное число))");
+        scanf("%d", &n);
     }
 
     int k_tr = 0;
 
-    cout << "Введите тройки чисел (3 положительных числа через пробел): ";
+    printf("Введите тройки чисел (3 положительных числа через пробел): ");
 
     for (int i = 0; i < n; i++) {
         double a, b,c;
-        cin >> a >> b >> c;
+        scanf("%lf %lf %lf", &a, &b, &c);
         while (a <= 0 || b <= 0 || c <= 0){
-            cout << "Дебил, введи положительные числа))";
-            cin >> a >> b >> c;
+            printf("Дебил, введи положительные числа))");
+            scanf("%lf %lf %lf", &a, &b, &c);
         }
 
         if ((a + b > c) && (a + c > b) && (b + c > a)){
             k_tr++;
         }
     }
-    cout << k_tr;
+    printf("Количество троек, которые являются треугольниакми: %d", k_tr);
 }
