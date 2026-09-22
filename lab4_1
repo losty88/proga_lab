@@ -1,0 +1,38 @@
+#include <stdio.h>
+#include <math.h>
+
+int main()
+{
+    double E;
+    printf("Введите E (0 > E < 1): ");
+    scanf("%lf", &E);
+    while (E <= 0 || E > 1)
+    {
+        printf("Ошибка! E должно быть больше 0 и меньше 1.\n");
+        printf("Введите E еще раз: ");
+        scanf("%lf", &E);
+    }
+
+    double sum = 0;
+    int n = 1;
+    while (1.0 / pow(3, n) >= E)
+    {
+        sum += (1.0 / pow(3, n)) * cos(pow(3, n - 1));
+        n++;
+    }
+    printf("Сумма 1 = %lf\n", sum);
+
+    double s = 0;
+    do {
+            s += (1.0 / pow(3, n)) * cos(pow(3, n - 1));
+            n++;
+        } while (1.0 / pow(3, n) >= E);
+    printf("Сумма 2 = %lf\n", sum);
+
+    double summa = 0;
+    for (int n = 1; 1.0 / pow(3, n) >= E; n++)
+    {
+        summa += (1.0 / pow(3, n)) * cos(pow(3, n - 1));
+    }
+    printf("Сумма 3 = %lf\n", sum);
+}
