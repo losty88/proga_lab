@@ -1,0 +1,67 @@
+#include <iostream>
+#include <clocale>
+
+int main() {
+    setlocale(LC_ALL, "Russian");
+    srand(time(0));
+
+    const int n = 1000;
+    int arr[n];
+    int N = 0;
+    int l;
+    int r;
+
+    printf("Введите диапазон генерации (например, -100-100 или 5-50): ");
+    scanf("%d-%d", &l, &r);
+
+    while (l == 0 && r == 0) {
+        printf("Введите диапазон через дефис (например, -100-100): ");
+        scanf("%d-%d", &l, &r);
+    }
+    if (l > r) {
+        int chislo = l;
+        l = r;
+        r = chislo;
+    }
+
+    printf("Введите количество чисел N (от 1 до %d): ", n);
+    while (scanf("%d", &N) != 1 || N <= 0 || N > n) {
+        printf("Введите корректное целое число в указанном диапазоне: \n");
+    }
+    printf("Сгенерированные целые числа:\n");
+    int range = r - l + 1;
+
+    for (int i = 0; i < N; ++i) {
+        arr[i] = l + rand() % range;
+        printf("%d ", arr[i]);
+    }
+
+    int min_pol = r + 1;
+    int max_otr = l - 1;
+
+    for (int i = 0; i < N; ++i) {
+        int num = arr[i];
+        if (num > 0 && num != 0) {
+            if (num < min_pol) {
+                min_pol = num;
+            }
+        }
+        else {
+            if (num > max_otr && num != 0) {
+                max_otr = num;
+            }
+        }
+    }
+    if (min_pol != r+1) {
+        printf("\n Минимальное положительное число: %d\n", min_pol);
+    }
+    else {
+        printf("\n Положительные числа не найдены.\n");
+    }
+    if (max_otr != l-1) {
+        printf("Максимальное отрицательное число: %d\n", max_otr);
+    }
+    else {
+        printf("Отрицательные числа не найдены.\n");
+    }
+}
