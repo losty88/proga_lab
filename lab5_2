@@ -1,0 +1,63 @@
+#include <iostream>
+#include <cstdlib>
+#include <ctime>
+using namespace std;
+
+int main()
+{
+    const int N = 100;
+    double a[N];     // исходный массив
+    double b[N];     // массив для подходящих элементов
+    int k = 0;       // сколько элементов попало в b
+
+    srand(time(0));
+
+    // заполняем массив случайными числами от 3 до 23
+    for (int i = 0; i < N; i++)
+    {
+        a[i] = 3 + (double)rand() / RAND_MAX * 20;
+    }
+
+    // выводим исходный массив
+    cout << "Исходный массив:" << endl;
+    for (int i = 0; i < N; i++)
+    {
+        cout << a[i] << " ";
+    }
+    cout << endl << endl;
+
+    // отбираем элементы, целая часть которых кратна 3
+    for (int i = 0; i < N; i++)
+    {
+        int c = (int)a[i];      // целая часть числа
+        if (c % 3 == 0)
+        {
+            b[k] = a[i];
+            k++;
+        }
+    }
+
+    // сортировка пузырьком по возрастанию
+    for (int i = 0; i < k - 1; i++)
+    {
+        for (int j = 0; j < k - 1 - i; j++)
+        {
+            if (b[j] > b[j + 1])
+            {
+                double t = b[j];
+                b[j] = b[j + 1];
+                b[j + 1] = t;
+            }
+        }
+    }
+
+    // выводим результат
+    cout << "Элементы, целая часть которых кратна 3 (по возрастанию):" << endl;
+    for (int i = 0; i < k; i++)
+    {
+        cout << b[i] << " ";
+    }
+    cout << endl;
+
+    return 0;
+}
