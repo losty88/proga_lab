@@ -1,35 +1,38 @@
-#include <iostream>
-#include <cstdlib>
-#include <ctime>
-using namespace std;
+#include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
 
 int main()
 {
-    const int N = 100;
-    double a[N];     // исходный массив
-    double b[N];     // массив для подходящих элементов
-    int k = 0;       // сколько элементов попало в b
+    const int NMax = 10000;
+    int N;
+    printf("Введите количетво элементов массива (от 1 до %d): \n", NMax);
+    scanf("%d", &N);
+    while (N < 1 || N > NMax) {
+        printf("Балбес, введи число от 1 до %d: \n", NMax);
+        scanf("%d", &N);
+    }
+    double a[NMax];
+    double b[NMax];
 
     srand(time(0));
 
-    // заполняем массив случайными числами от 3 до 23
     for (int i = 0; i < N; i++)
     {
         a[i] = 3 + (double)rand() / RAND_MAX * 20;
     }
 
-    // выводим исходный массив
-    cout << "Исходный массив:" << endl;
+    printf("Исходный массив:\n");
     for (int i = 0; i < N; i++)
     {
-        cout << a[i] << " ";
+        printf("%.2f ", a[i]);
     }
-    cout << endl << endl;
+    printf("\n\n");
 
-    // отбираем элементы, целая часть которых кратна 3
+    int k = 0;
     for (int i = 0; i < N; i++)
     {
-        int c = (int)a[i];      // целая часть числа
+        int c = (int)a[i];
         if (c % 3 == 0)
         {
             b[k] = a[i];
@@ -37,7 +40,6 @@ int main()
         }
     }
 
-    // сортировка пузырьком по возрастанию
     for (int i = 0; i < k - 1; i++)
     {
         for (int j = 0; j < k - 1 - i; j++)
@@ -50,14 +52,12 @@ int main()
             }
         }
     }
+    printf("Элементы, целая часть которых кратна 3 (по возрастанию):\n");
 
-    // выводим результат
-    cout << "Элементы, целая часть которых кратна 3 (по возрастанию):" << endl;
     for (int i = 0; i < k; i++)
     {
-        cout << b[i] << " ";
+        printf("%.2f ", b[i]);
     }
-    cout << endl;
-
+    printf("\n");
     return 0;
 }
