@@ -1,0 +1,78 @@
+#include <stdio.h>
+#include <locale.h>
+
+const int N = 100;
+const int M = 4;
+
+void otbor(int subjects[][M], int n)
+{
+    int i, j;
+    int count;
+
+    char subject[M][20] = {
+        "Mathematics",
+        "Physics",
+        "Chemistry",
+        "IT"
+    };
+
+    for (j = 0; j < M; j++)
+    {
+        count = 0;
+
+        printf("\nCandidates for the %s Olympiad:\n", subject[j]);
+
+        for (i = 0; i < n; i++)
+        {
+            if (subjects[i][j] == 5)
+            {
+                printf("Student No. %d\n", i + 1);
+                count++;
+            }
+        }
+
+        if (count == 0)
+            printf("There are no candidates.\n");
+    }
+}
+
+int main()
+{
+    setlocale(LC_ALL, "");
+
+    int subjects[N][M];
+    int n, i, j;
+
+    char subject[M][20] = {
+        "Mathematics",
+        "Physics",
+        "Chemistry",
+        "IT"
+    };
+    printf("Enter the number of students: ");
+    scanf("%d", &n);
+    while (n <= 0 || n > N)
+    {
+        printf("Error! Enter a number from 1 to 100: ");
+        scanf("%d", &n);
+    }
+
+    for (i = 0; i < n; i++)
+    {
+        printf("\nStudent No. %d\n", i + 1);
+
+        for (j = 0; j < M; j++)
+        {
+            printf("%s (2-5): ", subject[j]);
+            scanf("%d", &subjects[i][j]);
+
+            while (subjects[i][j] < 2 || subjects[i][j] > 5)
+            {
+                printf("Error! Enter a grade from 2 to 5: ");
+                scanf("%d", &subjects[i][j]);
+            }
+        }
+    }
+    otbor(subjects, n);
+    return 0;
+}
