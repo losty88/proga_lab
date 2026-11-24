@@ -1,0 +1,72 @@
+#include <iostream>
+#include <cstdlib>
+#include <ctime>
+
+int main() {
+    const int n = 100;
+    const int m = 100;
+    int a[n][m];
+    int N = 0;
+    int M = 0;
+    int maxch = 10000;
+
+    printf("Enter N (number of rows, 1-100): ");
+    scanf("%d", &N);
+    while (N < 1 || N > 100) {
+        printf("Enter a number from 1 to 100: ");
+        scanf("%d", &N);
+    }
+
+    printf("Enter M (number of columns, 1-100): ");
+    scanf("%d", &M);
+    while (M < 1 || M > 100) {
+        printf("Enter a number from 1 to 100: ");
+        scanf("%d", &M);
+    }
+
+    printf("Enter MAX (number of max number, 1-10000): ");
+    scanf("%d", &maxch);
+    while (maxch < 1 || maxch > 10000) {
+        printf("Enter a number from 1 to 10000: ");
+        scanf("%d", &maxch);
+    }
+
+    srand((unsigned)time(0));
+    for (int i = 0; i < N; i++) {
+        for (int j = 0; j < M; j++) {
+            a[i][j] = rand() % maxch + 1;
+        }
+    }
+
+    printf("Generated array (%d x %d):\n", N, M);
+    for (int i = 0; i < N; i++) {
+        for (int j = 0; j < M; j++) {
+            printf("%6d ", a[i][j]);
+        }
+        printf("\n");
+    }
+
+    long long product = 1;
+
+    for (int j = 0; j < M; j++) {
+        int min = a[0][j];
+        int max = a[0][j];
+
+        for (int i = 1; i < N; i++) {
+            if (a[i][j] < min) {
+                min = a[i][j];
+            }
+            if (a[i][j] > max) {
+                max = a[i][j];
+            }
+        }
+
+        int sum = min + max;
+        printf("Column %d: min = %d, max = %d, sum = %d\n", j + 1, min, max, sum);
+
+        product *= sum;
+    }
+
+    printf("Product of sums: %lld\n", product);
+    return 0;
+}
